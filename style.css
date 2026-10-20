@@ -1,0 +1,745 @@
+:root {
+  --cream: #fff6f2;
+  --blush: #fde3e8;
+  --pink: #f4a6b8;
+  --rose: #c2456b;
+  --rose-deep: #7a1f3d;
+  --wine: #4a1230;
+  --ink: #5a3a43;
+  --gold: #c9963b;
+  --gold-soft: #f2c14e;
+
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-script: "Dancing Script", "Brush Script MT", cursive;
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Hoa mờ hiện ra khi chưa có ảnh thật */
+  --ph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%23ee8fa6' fill-opacity='.55'%3E%3Cellipse cx='50' cy='26' rx='15' ry='24'/%3E%3Cellipse cx='50' cy='26' rx='15' ry='24' transform='rotate(72 50 50)'/%3E%3Cellipse cx='50' cy='26' rx='15' ry='24' transform='rotate(144 50 50)'/%3E%3Cellipse cx='50' cy='26' rx='15' ry='24' transform='rotate(216 50 50)'/%3E%3Cellipse cx='50' cy='26' rx='15' ry='24' transform='rotate(288 50 50)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='9' fill='%23f2c14e'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.6;
+}
+
+svg { display: block; }
+
+/* =====================================================
+   Khung slide
+   ===================================================== */
+
+.slide {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(56px, 9vh, 96px) clamp(20px, 5vw, 72px);
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, 100%);
+}
+
+.slide.dark { color: #ffe9ee; }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 5vh, 56px);
+}
+
+.head { text-align: center; }
+
+.eyebrow {
+  font-size: clamp(12px, 1.3vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5.4vw, 64px);
+  line-height: 1.12;
+  color: var(--rose-deep);
+}
+
+.dark h2 { color: #fff; }
+
+.name { font-weight: 700; font-style: normal; }
+
+/* =====================================================
+   Slide 1 · Mở đầu
+   ===================================================== */
+
+.cover {
+  background:
+    radial-gradient(60% 70% at 10% 8%, #ffd5df 0%, transparent 60%),
+    radial-gradient(55% 65% at 92% 96%, #ffe3bf 0%, transparent 62%),
+    linear-gradient(160deg, #fff9f6 0%, var(--cream) 55%, #ffeef0 100%);
+}
+
+.cover-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+}
+
+.cover-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(10px, 1.8vh, 18px);
+}
+
+.cover h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(46px, 8vw, 104px);
+  line-height: 1.04;
+}
+
+.shimmer {
+  color: transparent;
+  background: linear-gradient(100deg, #7a1f3d 0%, #c2456b 30%, #c9963b 50%, #c2456b 70%, #7a1f3d 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 7s linear infinite;
+}
+
+.script {
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(28px, 3.8vw, 46px);
+  line-height: 1.2;
+  color: var(--rose);
+}
+
+.to {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(20px, 2.8vw, 34px);
+  color: var(--rose);
+}
+
+.to .name { color: var(--rose-deep); }
+
+.lead {
+  max-width: 28em;
+  font-size: clamp(15px, 1.6vw, 19px);
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--rose-deep);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(201, 150, 59, 0.6);
+  border-radius: 999px;
+  transition: background 0.3s, translate 0.3s;
+}
+
+.hint:hover { background: #fff; translate: 0 -2px; }
+
+.hint span { animation: nudge 1.4s ease-in-out infinite; }
+
+.bouquet {
+  width: min(100%, 440px);
+  height: auto;
+  justify-self: center;
+  filter: drop-shadow(0 28px 36px rgba(122, 31, 61, 0.22));
+}
+
+.sway {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: sway 6s ease-in-out infinite alternate;
+}
+
+.bloom {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: spin var(--d, 9s) linear infinite;
+}
+
+/* =====================================================
+   Slide 2 · Thư nhỏ
+   ===================================================== */
+
+.letter {
+  background:
+    radial-gradient(50% 60% at 85% 15%, rgba(244, 166, 184, 0.28) 0%, transparent 65%),
+    linear-gradient(150deg, #4a1230 0%, #7a1f3d 58%, #9d2b4f 100%);
+}
+
+.letter-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 88px);
+}
+
+.arch-wrap { position: relative; justify-self: center; width: min(360px, 78%); }
+
+.arch {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 8px solid #fff;
+  border-radius: 999px 999px 28px 28px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+}
+
+.badge {
+  position: absolute;
+  right: -18px;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--wine);
+  background: radial-gradient(circle at 30% 25%, #ffe28a, var(--gold-soft) 60%, #d9a526);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  rotate: 10deg;
+  animation: bob 4s ease-in-out infinite alternate;
+}
+
+.badge small { font-size: 22px; font-weight: 500; }
+
+.deco { position: absolute; }
+.deco.d1 { width: 72px; height: 72px; left: -34px; top: 8%; color: #f9c4cf; animation: spin 18s linear infinite; }
+.deco.d2 { width: 44px; height: 44px; right: -10px; top: 2%; color: #ff8fa9; animation: beat 1.6s ease-in-out infinite; }
+
+.letter-text { display: flex; flex-direction: column; gap: clamp(14px, 2.4vh, 24px); }
+.letter-text p:not(.eyebrow):not(.script) { font-size: clamp(16px, 1.7vw, 20px); line-height: 1.75; }
+.letter-text .script { color: var(--gold-soft); }
+
+/* =====================================================
+   Slide 3 · Lời cảm ơn
+   ===================================================== */
+
+.thanks {
+  background:
+    radial-gradient(45% 55% at 0% 100%, #ffe3bf 0%, transparent 62%),
+    radial-gradient(50% 60% at 100% 0%, #ffd5df 0%, transparent 62%),
+    var(--cream);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(24px, 2.6vw, 36px);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(201, 150, 59, 0.35);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -24px rgba(122, 31, 61, 0.4);
+  transition: translate 0.35s, box-shadow 0.35s;
+}
+
+.card:hover { translate: 0 -8px; box-shadow: 0 30px 50px -22px rgba(122, 31, 61, 0.5); }
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.2;
+  color: var(--rose-deep);
+}
+
+.card p { font-size: 16px; }
+
+.ico {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: linear-gradient(135deg, #fbd3db, #ee8fa6);
+}
+
+.ico svg { width: 32px; height: 32px; }
+
+.card:hover .ico { animation: wiggle 0.6s ease-in-out; }
+
+/* =====================================================
+   Slide 4 · Khoảnh khắc
+   ===================================================== */
+
+.moments {
+  background:
+    radial-gradient(55% 60% at 50% 0%, #ffd5df 0%, transparent 65%),
+    linear-gradient(180deg, #fff0f2 0%, #ffe6ea 100%);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: start;
+  gap: clamp(14px, 1.6vw, 22px);
+}
+
+.slot:nth-child(even) { margin-top: 40px; }
+
+.slot {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.polaroid {
+  width: min(100%, 230px);
+  padding: 12px 12px 8px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 18px 34px -14px rgba(122, 31, 61, 0.45);
+  rotate: var(--r);
+  animation: bob 5s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.9s);
+  transition: rotate 0.4s, scale 0.4s;
+}
+
+.polaroid:hover { rotate: 0deg; scale: 1.08; z-index: 3; }
+
+.shot {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 3px;
+  background-color: var(--blush);
+}
+
+.polaroid figcaption {
+  padding: 6px 0 2px;
+  text-align: center;
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(20px, 1.8vw, 24px);
+  line-height: 1.25;
+  color: var(--rose-deep);
+}
+
+/* Ảnh thật nằm trong thư mục images/. Chưa có ảnh thì hiện nền hoa. */
+.ph-main, .shot {
+  background-repeat: no-repeat;
+}
+
+.ph-main {
+  background-image: var(--img), var(--ph), linear-gradient(160deg, #fde3e8, #f4a6b8);
+  background-position: center, center, center;
+  background-size: cover, 34%, cover;
+  --img: url("images/photo-main.jpg");
+}
+
+.shot {
+  background-image: var(--img), var(--ph), linear-gradient(160deg, #fff0f2, #fbd3db);
+  background-position: center, center, center;
+  background-size: cover, 38%, cover;
+}
+
+.ph-1 { --img: url("images/photo-1.jpg"); }
+.ph-2 { --img: url("images/photo-2.jpg"); }
+.ph-3 { --img: url("images/photo-3.jpg"); }
+.ph-4 { --img: url("images/photo-4.jpg"); }
+.ph-5 { --img: url("images/photo-5.jpg"); }
+.ph-6 { --img: url("images/photo-6.jpg"); }
+
+/* =====================================================
+   Slide 5 · Lời chúc
+   ===================================================== */
+
+.wishes {
+  background:
+    radial-gradient(50% 60% at 12% 90%, rgba(201, 150, 59, 0.28) 0%, transparent 65%),
+    radial-gradient(45% 55% at 92% 8%, rgba(244, 166, 184, 0.25) 0%, transparent 65%),
+    linear-gradient(160deg, #4a1230 0%, #6b1a3b 100%);
+}
+
+.wish-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 1.8vw, 24px);
+  counter-reset: wish;
+}
+
+.wish {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(22px, 2.4vw, 32px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
+  transition: background 0.3s, translate 0.3s;
+}
+
+.wish:hover { background: rgba(255, 255, 255, 0.16); translate: 0 -6px; }
+
+.wish::after {
+  counter-increment: wish;
+  content: counter(wish, decimal-leading-zero);
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.wish p {
+  font-size: clamp(16px, 1.6vw, 19px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.wish:hover .ico { animation: wiggle 0.6s ease-in-out; }
+
+/* =====================================================
+   Slide 6 · Kết
+   ===================================================== */
+
+.finale {
+  background:
+    radial-gradient(60% 55% at 50% 40%, #ffd1dc 0%, transparent 70%),
+    linear-gradient(170deg, #fff0f2 0%, #ffd9df 55%, #ffe4c2 100%);
+}
+
+.finale-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2vh, 22px);
+  text-align: center;
+}
+
+.big-heart {
+  width: clamp(120px, 20vw, 240px);
+  height: clamp(120px, 20vw, 240px);
+  color: #e0436b;
+  filter: drop-shadow(0 16px 30px rgba(224, 67, 107, 0.45));
+  animation: beat 1.5s ease-in-out infinite;
+}
+
+.script-big {
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(48px, 9vw, 120px);
+  line-height: 1.1;
+}
+
+.finale-box > p:not(.love) {
+  font-size: clamp(16px, 1.9vw, 22px);
+  letter-spacing: 0.04em;
+  color: var(--rose-deep);
+}
+
+.love {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(22px, 3vw, 36px);
+  color: var(--rose);
+}
+
+.love .name { color: var(--rose-deep); }
+
+.again {
+  margin-top: 8px;
+  padding: 12px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  background: var(--rose);
+  border-radius: 999px;
+  box-shadow: 0 12px 24px -10px rgba(194, 69, 107, 0.8);
+  transition: translate 0.3s, background 0.3s;
+}
+
+.again:hover { background: var(--rose-deep); translate: 0 -3px; }
+
+.hearts {
+  list-style: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hearts li {
+  position: absolute;
+  bottom: -60px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  color: #ff8fa9;
+  opacity: 0;
+  animation: rise var(--d) ease-in var(--t) infinite;
+}
+
+.hearts svg { width: 100%; height: 100%; }
+
+/* =====================================================
+   Trang trí dùng chung
+   ===================================================== */
+
+.sparkle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 1;
+  width: var(--s);
+  height: var(--s);
+  color: var(--gold-soft);
+  animation: twinkle 2.8s ease-in-out var(--t) infinite;
+}
+
+.sparkle svg { width: 100%; height: 100%; }
+
+.fly {
+  position: absolute;
+  left: 0;
+  top: var(--y);
+  z-index: 3;
+  width: var(--w);
+  pointer-events: none;
+  animation: flight var(--d) linear var(--t) infinite;
+}
+
+.fly svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 100 / 80;
+  animation: flap 0.35s ease-in-out infinite alternate;
+}
+
+.petals {
+  list-style: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.petals li {
+  position: absolute;
+  top: -80px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  color: var(--c);
+  opacity: 0.8;
+  animation: fall var(--d) linear var(--t) infinite;
+}
+
+.petals svg { width: 100%; height: 100%; }
+
+/* Thanh tiến độ và chấm điều hướng */
+
+.progress {
+  display: none;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  height: 4px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--pink), var(--gold-soft), var(--rose));
+}
+
+.dots {
+  position: fixed;
+  right: clamp(10px, 1.6vw, 22px);
+  top: 50%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  translate: 0 -50%;
+  scroll-target-group: auto;
+}
+
+.dots a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--rose);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s, background 0.3s;
+}
+
+.dots a:hover {
+  background: var(--rose);
+  transform: scale(1.45);
+}
+
+.dots a:target-current {
+  background: var(--rose);
+  transform: scale(1.45);
+}
+
+/* =====================================================
+   Animation
+   ===================================================== */
+
+@keyframes shimmer { to { background-position: -220% 0; } }
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes sway    { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes beat    { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+@keyframes nudge   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+@keyframes bob     { from { translate: 0 0; } to { translate: 0 -12px; } }
+@keyframes flap    { to { transform: scaleX(0.45); } }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-14deg) scale(1.1); }
+  75% { transform: rotate(14deg) scale(1.1); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(34px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(48px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; scale: 0.5; }
+  50%      { opacity: 1; scale: 1; }
+}
+
+@keyframes fall {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(28px, 28vh) rotate(90deg); }
+  50%  { transform: translate(-24px, 56vh) rotate(180deg); }
+  75%  { transform: translate(24px, 84vh) rotate(270deg); }
+  100% { transform: translate(0, 112vh) rotate(360deg); }
+}
+
+@keyframes rise {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  15%  { opacity: 0.85; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(1.1); }
+}
+
+@keyframes flight {
+  0%   { translate: -12vw 0; rotate: 8deg; }
+  25%  { translate: 25vw -40px; rotate: -6deg; }
+  50%  { translate: 55vw 30px; rotate: 6deg; }
+  75%  { translate: 85vw -30px; rotate: -8deg; }
+  100% { translate: 112vw 10px; rotate: 4deg; }
+}
+
+@keyframes grow { to { transform: scaleX(1); } }
+
+/* Slide 1 vào bằng thời gian: nó đã nằm sẵn trong khung nhìn khi mở trang */
+.intro {
+  animation: rise-in 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.14s + 0.1s);
+}
+
+/* Các slide sau hiện dần theo cuộn trang (trình duyệt chưa hỗ trợ thì hiện sẵn) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal ease-out both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 6%) entry calc(50% + var(--i, 0) * 6%);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .progress {
+    display: block;
+    transform: scaleX(0);
+    animation: grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+/* =====================================================
+   Màn hình nhỏ
+   ===================================================== */
+
+@media (max-width: 1100px) {
+  .gallery { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .slot:nth-child(even) { margin-top: 0; }
+  .slot:nth-child(3n+2) { margin-top: 32px; }
+}
+
+@media (max-width: 960px) {
+  .cards, .wish-grid { grid-template-columns: repeat(2, 1fr); }
+  .letter-grid { grid-template-columns: 1fr; }
+  .letter-text { text-align: center; align-items: center; }
+}
+
+@media (max-width: 760px) {
+  .cover-grid { grid-template-columns: 1fr; text-align: center; }
+  .cover-text { align-items: center; order: 2; }
+  .bouquet { order: 1; width: min(70%, 300px); }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .slot:nth-child(n) { margin-top: 0; }
+  .slot:nth-child(even) { margin-top: 28px; }
+  .dots { display: none; }
+  .badge { right: -8px; width: 88px; height: 88px; font-size: 26px; }
+}
+
+@media (max-width: 480px) {
+  .cards, .wish-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .petals, .hearts, .fly { display: none; }
+  .shimmer { color: var(--rose-deep); background: none; }
+}
